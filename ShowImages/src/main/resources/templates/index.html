@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Upload Image</button>
+    </form>
+    <hr>
+    <div>
+        <h2>All Images</h2>
+        <ul>
+            <th:block th:each="image : ${images}">
+                <li>
+                    <img th:src="@{'/images/' + ${image.id}}" width="150" height="150" alt="Image">
+                    <form th:action="@{'/images/' + ${image.id} + '/delete'}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <form th:action="@{'/images/' + ${image.id} + '/update'}" method="post" enctype="multipart/form-data" style="display:inline;">
+                        <input type="file" name="image" required>
+                        <button type="submit">Update</button>
+                    </form>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>
